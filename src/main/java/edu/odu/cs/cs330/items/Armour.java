@@ -17,7 +17,7 @@ public class Armour extends Item {
     /**
      * The amount of damage that can be negated.
      */
-    protected int  defense;
+    protected int defense;
 
     /**
      * Base material out of which the armour is constructed.
@@ -44,9 +44,16 @@ public class Armour extends Item {
      * Default to a armour with an empty name, zero durability, zero defense,
      * blank material, no modifier a zero modifier level, and a blank element.
      */
-    public Armour()
-    {
+    public Armour() {
         // Initialize all data members (including those inherited from Item)
+        this.name = "";
+        this.durability = 0;
+        this.defense = 0;
+        this.material = "";
+        this.modifier = "";
+        this.modiferLevel = 0;
+        this.element = "";
+        this.stackable = false; // Armour is not stackable
     }
 
     /**
@@ -54,16 +61,22 @@ public class Armour extends Item {
      *
      * @param src armour to duplicate
      */
-    public Armour(Armour src)
-    {
+    public Armour(Armour src) {
         // Set and/or copy data members for *this* object based on *src*.
+        this.name = src.name;
+        this.durability = src.durability;
+        this.defense = src.defense;
+        this.material = src.material;
+        this.modifier = src.modifier;
+        this.modiferLevel = src.modiferLevel;
+        this.element = src.element;
+        this.stackable = false; // Armour is not stackable
     }
 
     /**
      * Retrieve armour durability.
      */
-    public int getDurability()
-    {
+    public int getDurability() {
         return this.durability;
     }
 
@@ -72,8 +85,7 @@ public class Armour extends Item {
      *
      * @param dur new durability value
      */
-    public void setDurability(int dur)
-    {
+    public void setDurability(int dur) {
         this.durability = dur;
     }
 
@@ -82,8 +94,7 @@ public class Armour extends Item {
      *
      * @return total defense provided
      */
-    public int getDefense()
-    {
+    public int getDefense() {
         return this.defense;
     }
 
@@ -92,8 +103,7 @@ public class Armour extends Item {
      *
      * @param def replacement defense
      */
-    public void setDefense(int def)
-    {
+    public void setDefense(int def) {
         this.defense = def;
     }
 
@@ -102,8 +112,7 @@ public class Armour extends Item {
      *
      * @return base material
      */
-    public String getMaterial()
-    {
+    public String getMaterial() {
         return this.material;
     }
 
@@ -112,8 +121,7 @@ public class Armour extends Item {
      *
      * @param mat replacement material type
      */
-    public void setMaterial(String mat)
-    {
+    public void setMaterial(String mat) {
         this.material = mat;
     }
 
@@ -122,8 +130,7 @@ public class Armour extends Item {
      *
      * @return buff/debuff provided
      */
-    public String getModifier()
-    {
+    public String getModifier() {
         return this.modifier;
     }
 
@@ -132,8 +139,7 @@ public class Armour extends Item {
      *
      * @param mod updated modifier
      */
-    public void setModifier(String m)
-    {
+    public void setModifier(String m) {
         this.modifier = m;
     }
 
@@ -142,8 +148,7 @@ public class Armour extends Item {
      *
      * @return buff/debuff level
      */
-    public int getModifierLevel()
-    {
+    public int getModifierLevel() {
         return this.modiferLevel;
     }
 
@@ -152,8 +157,7 @@ public class Armour extends Item {
      *
      * @param level replacement modifier level
      */
-    public void setModifierLevel(int level)
-    {
+    public void setModifierLevel(int level) {
         this.modiferLevel = level;
     }
 
@@ -162,8 +166,7 @@ public class Armour extends Item {
      *
      * @return element
      */
-    public String getElement()
-    {
+    public String getElement() {
         return this.element;
     }
 
@@ -172,14 +175,12 @@ public class Armour extends Item {
      *
      * @param ele new element
      */
-    public void setElement(String ele)
-    {
+    public void setElement(String ele) {
         this.element = ele;
     }
 
     @Override
-    public boolean isStackable()
-    {
+    public boolean isStackable() {
         return this.stackable;
     }
 
@@ -187,33 +188,34 @@ public class Armour extends Item {
      * Read Armour attributes.
      */
     @Override
-    public void read(Scanner snr)
-    {
-        super.name   = snr.next();
+    public void read(Scanner snr) {
+        super.name = snr.next();
 
         // Complete this method
+        this.material = snr.next();
+        this.durability = snr.nextInt();
+        this.defense = snr.nextInt();
+        this.modifier = snr.next();
+        this.modiferLevel = snr.nextInt();
+        this.element = snr.next();
     }
 
     /**
      * Clone--i.e., copy--this Armour.
      */
     @Override
-    public Item clone()
-    {
+    public Item clone() {
         // Replace the next line
-        return null;
+        return new Armour(this);
     }
 
     /**
      * *Print* one Armour.
      */
     @Override
-    public String toString()
-    {
-        return "Implement This Function";
+    public String toString() {
+        return String.format("  Nme: %s\n  Dur: %d\n  Def: %d\n  Mtl: %s\n  Mdr: %s (Lvl %d)\n  Emt: %s\n",
+                this.getName(), this.durability, this.defense, this.material, this.modifier, this.modiferLevel,
+                this.element);
     }
 }
-
-
-
-
